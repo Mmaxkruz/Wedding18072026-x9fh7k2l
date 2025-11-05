@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приглашение на свадьбу — Максим и Екатерина</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fffafc;
+      color: #333;
+      text-align: center;
+      line-height: 1.6;
+    }
+    header {
+      padding: 80px 20px 40px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+    h2 {
+      font-weight: 400;
+      margin-top: 0;
+    }
+    .date {
+      font-size: 1.2rem;
+      color: #999;
+    }
+    section {
+      padding: 40px 20px;
+    }
+    .photos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .photos img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    @media (min-width: 600px) {
+      .photos {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+    .invite-text {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+    form {
+      background: #fff;
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: 30px auto;
+    }
+    form input, form textarea, form select, form button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    form button {
+      background: #f3d6e4;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background: #e6b9d2;
+    }
+    iframe {
+      border: 0;
+      width: 100%;
+      height: 300px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .map-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #f3d6e4;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #333;
+      transition: background 0.3s ease;
+    }
+    .map-button:hover {
+      background-color: #e6b9d2;
+    }
+    footer {
+      font-size: 0.9rem;
+      color: #999;
+      padding: 30px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Максим и Екатерина</h1>
+    <h2>Приглашаем вас на нашу свадьбу</h2>
+    <p class="date">18 июля 2026 • шатёр "Зефир"</p>
+  </header>
+
+  <section class="photos">
+    <img src="https://via.placeholder.com/250x250.png?text=Фото+Максима" alt="Фото Максима">
+    <img src="https://via.placeholder.com/250x250.png?text=Фото+Екатерины" alt="Фото Екатерины">
+  </section>
+
+  <section>
+    <p class="invite-text">
+      Дорогие друзья! Мы счастливы пригласить вас на день, когда две истории станут одной.
+      Приходите разделить с нами этот особенный момент в кругу самых близких.
+    </p>
+  </section>
+
+  <section>
+    <h2>Место проведения</h2>
+    <p>Шатёр "Зефир" • 18 июля 2026</p>
+    <iframe src="https://yandex.ru/map-widget/v1/?text=шатёр%20Зефир" allowfullscreen></iframe>
+    <a class="map-button" href="https://yandex.ru/maps/?text=шатёр%20Зефир" target="_blank">Открыть в Яндекс.Картах</a>
+  </section>
+
+  <section>
+    <h2>RSVP</h2>
+    <form id="rsvpForm">
+      <input type="text" name="name" placeholder="Ваше имя" required />
+      <select name="attendance" required>
+        <option value="">Выберите вариант</option>
+        <option value="yes">Я приду</option>
+        <option value="no">К сожалению, не смогу</option>
+      </select>
+      <textarea name="message" rows="3" placeholder="Комментарий (например: +1 гость)"></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+
+  <footer>
+    С любовью, Максим и Екатерина 💕
+  </footer>
+
+  <script>
+    // Когда создашь Telegram-бота, замени эти данные
+    const BOT_TOKEN = "PASTE_YOUR_BOT_TOKEN_HERE";
+    const CHAT_ID = "PASTE_YOUR_CHAT_ID_HERE";
+
+    document.getElementById("rsvpForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const name = form.name.value.trim();
+      const attendance = form.attendance.value === "yes" ? "✅ Приду" : "❌ Не смогу прийти";
+      const message = form.message.value.trim();
+
+      const text = `💌 Новое RSVP:\n👤 Имя: ${name}\n📋 Ответ: ${attendance}\n💬 Комментарий: ${message || "-"}`;
+
+      // Отправка в Telegram
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: CHAT_ID, text })
+      });
+
+      alert("Спасибо! Ваш ответ отправлен 💖");
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
