@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Приглашение на свадьбу — Максим и Екатерина</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', serif; /* Пример более винтажного шрифта */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* --- Фоновое изображение --- */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), /* Белый полупрозрачный слой */
+            url('media/background.jpg'); /* Ваше фоновое изображение */
+            background-size: cover; /* Изображение будет покрывать весь фон */
+            background-position: center center; /* Центрируем изображение */
+            background-attachment: fixed; /* Фиксируем изображение при прокрутке */
+            background-repeat: no-repeat; /* Запрещаем повторение изображения */
+            /* --- Конец фонового изображения --- */
+
+            min-height: 100vh; /* Гарантируем, что body занимает всю высоту, чтобы фон был виден */
+            display: flex;
+            flex-direction: column; /* Для размещения контента сверху вниз */
+        }
+
+        header {
+            padding: 6rem 1rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-weight: 400;
+            margin-top: 0;
+        }
+
+        .date {
+            font-size: 1.2rem;
+            color: #999;
+        }
+
+        section {
+            padding: 3rem 1rem;
+        }
+
+        /* Стили для вставленного текста (первое приглашение) */
+        .invite-text {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            padding: 0 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Стили для блока подсказок */
+        .tips-section {
+            background-color: #f7eef3;
+            padding: 3rem 1rem;
+        }
+
+        .tips-list {
+            text-align: left;
+            max-width: 650px;
+            margin: 2rem auto 0;
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .tip-item {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #e6b9d2;
+        }
+
+            .tip-item strong {
+                display: block;
+                font-size: 1.1rem;
+                color: #e6b9d2;
+                margin-bottom: 0.5rem;
+            }
+
+        /* --- СТИЛИ ДЛЯ БЛОКА ТАЙМЕРА И КАЛЕНДАРЯ --- */
+        .countdown-container {
+            padding: 3rem 1rem;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            /* Делаем контейнер гибким */
+            flex-direction: column;
+            /* Таймер под календарем по умолчанию */
+            align-items: center;
+            gap: 30px;
+            /* Отступ между таймером и календарем */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Медиа-запрос для размещения в ряд на больших экранах */
+        @media (min-width: 600px) {
+            .countdown-wrapper {
+                flex-direction: row;
+                /* Календарь слева, таймер справа */
+                justify-content: space-around;
+                align-items: flex-start;
+            }
+        }
+
+        .countdown-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #e6b9d2;
+            line-height: 1.1;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* СТИЛИ ДЛЯ КАЛЕНДАРЯ */
+        .mini-calendar {
+            width: 250px;
+            background-color: #fff;
+            border: 1px solid #e6b9d2;
+            border-radius: 1rem;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .calendar-header {
+            background-color: #e6b9d2;
+            color: #fff;
+            padding: 0.5rem 0;
+            border-radius: 0.8rem 0.8rem 0 0;
+            font-weight: 600;
+            margin: -10px -10px 10px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+        }
+
+        .day-name {
+            font-weight: 500;
+            color: #999;
+            padding: 0.3rem 0;
+        }
+
+        .day-number {
+            padding: 0.4rem 0;
+            border-radius: 50%;
+            margin: 2px;
+        }
+
+            /* Стиль для отметки нашей даты (18 июля) */
+            .day-number.highlight {
+                background-color: #f3d6e4;
+                color: #000;
+                font-weight: 700;
+                border: 2px solid #e6b9d2;
+            }
+
+        /* КОНЕЦ СТИЛЕЙ БЛОКА ТАЙМЕРА/КАЛЕНДАРЯ */
+
+        /* --- СТИЛИ ДЛЯ РАСПИСАНИЯ --- */
+        .schedule-container {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px dashed #e6b9d2;
+        }
+
+            .schedule-container h3 {
+                font-size: 1.4rem;
+                font-weight: 500;
+                color: #333;
+                margin-bottom: 1.5rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+        .schedule-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-width: 350px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+            .schedule-list li {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
+                line-height: 1.5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                opacity: 0; /* Изначально скрываем */
+                transform: translateX(-20px); /* Смещаем влево */
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Анимация */
+            }
+
+                .schedule-list li.animate {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+
+            .schedule-list .time {
+                font-weight: 700;
+                color: #000;
+                display: block;
+                margin-bottom: 0.2rem;
+                font-size: 1.2rem;
+            }
+
+            .schedule-list .icon {
+                width: 28px; /* Размер иконок */
+                height: 28px;
+                fill: #e6b9d2; /* Цвет иконок */
+                flex-shrink: 0;
+            }
+
+        /* ------------------------------------- */
+        .photos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding-bottom: 0;
+        }
+
+            .photos img {
+                width: 80%;
+                max-width: 250px;
+                height: auto;
+                object-fit: cover;
+                border-radius: 50%;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+                .photos img:hover {
+                    transform: scale(1.05);
+                }
+
+        /* --- СТИЛИ ДЛЯ РАЗДЕЛИТЕЛЕЙ --- */
+        .divider {
+            width: 60%;
+            max-width: 250px;
+            height: 1px;
+            background-color: #e6b9d2;
+            margin: 3rem auto;
+            opacity: 0.7;
+        }
+
+        .countdown-container {
+            padding: 40px 20px;
+            background-color: #f8f8f8; /* Светлый фон */
+            text-align: center;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .time-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px 10px;
+            width: 80px; /* Фиксированная ширина */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .time-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #a37b67; /* Цвет для чисел */
+            display: block;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* --- Стили для Анимации Расписания --- */
+
+        #schedule-list-animated li {
+            opacity: 0; /* Изначально скрываем */
+            transform: translateY(30px); /* Сдвигаем вниз */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+            #schedule-list-animated li.animate {
+                opacity: 1; /* Показываем */
+                transform: translateY(0); /* Сдвигаем обратно */
+            }
+
+            /* Добавляем задержку для эффекта "водопада" (можно настроить) */
+            #schedule-list-animated li:nth-child(1) {
+                transition-delay: 0.1s;
+            }
+
+            #schedule-list-animated li:nth-child(2) {
+                transition-delay: 0.2s;
+            }
+
+            #schedule-list-animated li:nth-child(3) {
+                transition-delay: 0.3s;
+            }
+
+            #schedule-list-animated li:nth-child(4) {
+                transition-delay: 0.4s;
+            }
+
+            #schedule-list-animated li:nth-child(5) {
+                transition-delay: 0.5s;
+            }
+
+            #schedule-list-animated li:nth-child(6) {
+                transition-delay: 0.6s;
+            }
+
+        .music-player {
+            display: flex;
+            justify-content: center; /* Центрируем кнопки */
+            align-items: center; /* Выравниваем по центру вертикально */
+            gap: 15px; /* Увеличиваем расстояние для лучшего вида */
+            margin: 30px auto;
+            padding: 10px 20px;
+            background-color: #f8f8f8; /* Светлый фон для контраста с секцией */
+            border-radius: 10px; /* Слегка скругленные углы */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Легкая тень для выделения */
+        }
+
+            .music-player button {
+                /* Основная стилизация: без рамки, просто иконка */
+                background: none;
+                border: none; /* Убран border */
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                color: #a37b67; /* Основной цвет иконок */
+                font-size: 1.2rem;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+
+        /* Стили для главных кнопок (Play/Pause, Mute) */
+        #play-pause-btn, #mute-btn {
+            font-size: 1.5rem; /* Делаем главные кнопки крупнее */
+        }
+
+        .music-player button:hover {
+            /* Эффект при наведении: легкий круговой фон */
+            background-color: rgba(163, 123, 103, 0.1); /* Прозрачный фон основного цвета */
+            color: #8c6a5a; /* Цвет иконки становится чуть темнее */
+            transform: scale(1.05);
+        }
+
+        .music-player button#favorite-btn.active {
+            /* Стиль для активной кнопки "Сердце" */
+            color: #E91E63;
+        }
+
+            .music-player button#favorite-btn.active:hover {
+                background-color: rgba(233, 30, 99, 0.1); /* Прозрачный фон розового цвета */
+                color: #D81B60;
+            }
+
+        /* Скрываем нативный аудио-элемент */
+        #wedding-music {
+            display: none;
+        }
+
+        /* Стили для формы RSVP */
+        form {
+            background: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+            form input[type="text"],
+            form textarea,
+            form button {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: 0.8rem;
+                font-size: 1rem;
+                font-family: "Segoe UI", sans-serif;
+            }
+
+            form textarea {
+                resize: vertical;
+            }
+
+            form button {
+                background: #f3d6e4;
+                border: none;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+
+                form button:hover {
+                    background: #e6b9d2;
+                }
+
+        iframe {
+            border: 0;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 1rem auto;
+        }
+
+        .map-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background-color: #f3d6e4;
+            border-radius: 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background 0.3s ease;
+        }
+
+            .map-button:hover {
+                background-color: #e6b9d2;
+            }
+
+        footer {
+            font-size: 0.9rem;
+            color: #999;
+            padding: 2rem 1rem;
+        }
+
+        /* ======================================================
+        СТИЛИ ДЛЯ СВИТЧ-БОКСА
+        ======================================================
+        */
+        .switch-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .switch-wrapper {
+            display: flex;
+            position: relative;
+            background-color: #f0f0f0;
+            border-radius: 0.8rem;
+            padding: 4px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+            .switch-wrapper.transport-switch {
+                max-width: 250px;
+            }
+
+        .switch-input {
+            display: none;
+        }
+
+        .switch-label {
+            flex-grow: 1;
+            padding: 0.6rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+            color: #555;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .switch-input:checked + .switch-label {
+            color: #333;
+        }
+
+        .switch-indicator {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            width: calc(50% - 4px);
+            background-color: #e6b9d2;
+            border-radius: 0.6rem;
+            transition: transform 0.3s ease;
+            z-index: 5;
+        }
+
+        /* Передвижение "бегунка" для Присутствия */
+        #attendance-no:checked ~ .switch-indicator {
+            transform: translateX(100%);
+        }
+
+        /* Передвижение "бегунка" для Транспорта */
+        #transport-yes:checked ~ .switch-indicator.transport-indicator {
+            transform: translateX(100%);
+        }
+
+        /* ======================================================
+        КОНЕЦ СТИЛЕЙ ДЛЯ СВИТЧ-БОКСА
+        ======================================================
+
+        /* --- Стили для текста "Максим и Катя" (если он обернут в .italianno-text) --- */
+        .italianno-text {
+            font-size: 3.5rem; /* Оставляем крупным */
+            line-height: 1;
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><span class="italianno-text">Максим и Катя</span></h1>
+    </header>
+
+    <section class="photos">
+        <img src="https://via.placeholder.com/250x250.png?text=Фото+Максима" alt="Фото Максима">
+        <img src="https://via.placeholder.com/250x250.png?text=Фото+Екатерины" alt="Фото Екатерины">
+    </section>
+
+    <audio id="wedding-music" loop>
+        <source src="media/music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио-элемент.
+    </audio>
+
+    <div class="music-player">
+        <button id="skip-backward-btn" title="Предыдущий трек (неактивно)">
+            <i class="fas fa-step-backward"></i>
+        </button>
+
+        <button id="play-pause-btn" title="Воспроизвести/Пауза">
+            <i class="fas fa-play"></i>
+        </button>
+
+
+        <button id="skip-forward-btn" title="Следующий трек (неактивно)">
+            <i class="fas fa-step-forward"></i>
+        </button>
+
+        <button id="mute-btn" title="Выключить/Включить звук">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="favorite-btn" title="В избранное (просто иконка)">
+            <i class="far fa-heart"></i>
+        </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <section class="invite-text">
+        Дорогие родные и близкие!
+
+        Мы давно ждали момента, когда сможем разделить с вами самый важный и счастливый день в нашей жизни.
+        Совсем скоро состоится наша свадьба!
+
+        Мы рады пригласить вас стать свидетелями этого торжества и разделить с нами самые яркие моменты!
+    </section>
+
+    <section class="countdown-container">
+        <h2>До самого важного дня осталось</h2>
+
+        <div class="countdown-wrapper">
+
+            <div class="mini-calendar">
+                <div class="calendar-header">Июль 2026</div>
+                <div class="calendar-grid">
+                    <div class="day-name">Пн</div>
+                    <div class="day-name">Вт</div>
+                    <div class="day-name">Ср</div>
+                    <div class="day-name">Чт</div>
+                    <div class="day-name">Пт</div>
+                    <div class="day-name">Сб</div>
+                    <div class="day-name">Вс</div>
+
+                    <div class="day-number"></div>
+                    <div class="day-number"></div>
+                    <div class="day-number">1</div>
+                    <div class="day-number">2</div>
+                    <div class="day-number">3</div>
+                    <div class="day-number">4</div>
+                    <div class="day-number">5</div>
+
+                    <div class="day-number">6</div>
+                    <div class="day-number">7</div>
+                    <div class="day-number">8</div>
+                    <div class="day-number">9</div>
+                    <div class="day-number">10</div>
+                    <div class="day-number">11</div>
+                    <div class="day-number">12</div>
+
+                    <div class="day-number">13</div>
+                    <div class="day-number">14</div>
+                    <div class="day-number">15</div>
+                    <div class="day-number">16</div>
+                    <div class="day-number">17</div>
+                    <div class="day-number highlight">18</div>
+                    <div class="day-number">19</div>
+
+                    <div class="day-number">20</div>
+                    <div class="day-number">21</div>
+                    <div class="day-number">22</div>
+                    <div class="day-number">23</div>
+                    <div class="day-number">24</div>
+                    <div class="day-number">25</div>
+                    <div class="day-number">26</div>
+
+                    <div class="day-number">27</div>
+                    <div class="day-number">28</div>
+                    <div class="day-number">29</div>
+                    <div class="day-number">30</div>
+                    <div class="day-number">31</div>
+                    <div class="day-number"></div>
+                    <div class="day-number"></div>
+                </div>
+            </div>
+
+            <div class="countdown-list" id="countdown-timer">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-label">Дней</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Часов</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Минут</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Секунд</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section>
+        <p class="invite-text">
+            Дорогие друзья! Мы счастливы пригласить вас на день, когда две истории станут одной.
+            Приходите разделить с нами этот особенный момент в кругу самых близких.
+        </p>
+
+        <div class="schedule-container">
+            <h3>Тайминг дня</h3>
+            <ul class="schedule-list" id="schedule-list-animated">
+                <li>
+                    <span class="time">11:30</span>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 11c1.66 0 2.99-1.34 2.99-3S13.66 5 12 5s-3 1.34-3 3 1.34 3 3 3zm0 2c-2.76 0-5 2.24-5 5v2h10v-2c0-2.76-2.24-5-5-5z" fill-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <span class="event-text">Сбор гостей у ЗАГСа</span>
+                </li>
+                <li>
+                    <span class="time">11:45</span>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 1c-3.86 0-7 3.14-7 7 0 3.87 3.13 7 7 7s7-3.13 7-7c0-3.86-3.14-7-7-7zM7 17h10v2H7z" />
+                            <circle cx="12" cy="8" r="3" />
+                        </svg>
+                    </div>
+                    <span class="event-text">Время росписи</span>
+                </li>
+                <li>
+                    <span class="time">16:30</span>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M22 17h-2v-1h3v-2H1v2h3v1H2v2h2v1H1v2h22v-2h-2v-1zM6 15h12v-2H6v2zm0-4h12V9H6v2zm0-4h12V5H6v2z" />
+                        </svg>
+                    </div>
+                    <span class="event-text">Сбор гостей у банкетного зала "Зефир"</span>
+                </li>
+                <li>
+                    <span class="time">17:00</span>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M16 11H8c-1.1 0-2 .9-2 2v2H4v-2c0-2.21 1.79-4 4-4h8c2.21 0 4 1.79 4 4v2h-2v-2c0-1.1-.9-2-2-2zM12 2c-4.42 0-8 3.58-8 8v7h16v-7c0-4.42-3.58-8-8-8zM4 21h16v-2H4v2z" />
+                        </svg>
+                    </div>
+                    <span class="event-text">Начало банкета</span>
+                </li>
+                <li>
+                    <span class="time">22:00</span>
+                    <div class="icon-wrapper">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M15 12c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1s.45-1 1-1h10c.55 0 1 .45 1 1zm0-3c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1s.45-1 1-1h10c.55 0 1 .45 1 1zm0-3c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1s.45-1 1-1h10c.55 0 1 .45 1 1zM19 19H5V5h14v14zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                        </svg>
+                    </div>
+                    <span class="event-text">Завершение банкета</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Место проведения</h2>
+        <p>Шатёр "Зефир" • 18 июля 2026</p>
+        <iframe src="https://yandex.ru/map-widget/v1/?text=шатёр%20Зефир" allowfullscreen></iframe>
+        <a class="map-button" href="https://yandex.ru/maps/?text=шатёр%20Зефир" target="_blank">Открыть в Яндекс.Картах</a>
+        <div class="divider"></div>
+    </section>
+
+    <section class="tips-section">
+        <h2>Полезные подсказки</h2>
+        <ul class="tips-list">
+            <li class="tip-item">
+                <strong>Сюрприз</strong>
+                Возьмите с собой **отличное настроение!** Приветствуются ваши поздравления, активное участие в интерактивах, творческие выступления! Вы можете обратиться к нашему организатору для воплощения своих идей:
+                <p>Анастасия (номер....)</p>
+            </li>
+            <li class="tip-item">
+                <strong>Цветы</strong>
+                Наш праздник будет окружен изобилием цветов, поэтому приятным комплиментом для нас **вместо букета** будет бутылка вашего любимого вина, которую мы откроем на ближайшем совместном празднике.
+            </li>
+            <li class="tip-item">
+                <strong>Что дарить?</strong>
+                В качестве подарка будем рады **вкладу в бюджет нашей семьи**. Он точно поможет воплотить нашу мечту в реальность!
+            </li>
+            <li class="tip-item">
+                <strong>Что делать, если...?</strong>
+                Если у вас появились какие-либо вопросы, вам с радостью поможет наш замечательный организатор:
+                <p>Анастасия (номер....)</p>
+            </li>
+            <li class="tip-item">
+                <strong>Маленькие гости</strong>
+                К великому сожалению, в ресторане нет детских зон и нет возможности пригласить аниматоров, потому просим заранее подумать о том, с кем оставить Вашу кроху на праздничный вечер.
+            </li>
+        </ul>
+        <div class="divider"></div>
+    </section>
+    <section>
+        <h2>RSVP</h2>
+        <form id="rsvpForm">
+            <input type="text" name="name" placeholder="Ваше ФИО" required />
+
+            <p style="margin: 0; font-size: 0.95rem; color: #555; text-align: left;">Подтвердите Ваше присутствие:</p>
+            <div class="switch-box">
+                <div class="switch-wrapper">
+                    <input type="radio" id="attendance-yes" name="attendance" value="Приду" class="switch-input" required checked>
+                    <label for="attendance-yes" class="switch-label">С удовольствием приду!</label>
+                    <input type="radio" id="attendance-no" name="attendance" value="Не смогу" class="switch-input">
+                    <label for="attendance-no" class="switch-label">К сожалению, не смогу</label>
+                    <div class="switch-indicator"></div>
+                </div>
+            </div>
+
+            <p style="margin: 0; font-size: 0.95rem; color: #555; text-align: left;">Нужен ли Вам трансфер до/от ресторана?</p>
+            <div class="switch-box">
+                <div class="switch-wrapper transport-switch">
+                    <input type="radio" id="transport-no" name="transport" value="Не нужен" class="switch-input" required checked>
+                    <label for="transport-no" class="switch-label">Не нужен</label>
+                    <input type="radio" id="transport-yes" name="transport" value="Нужен" class="switch-input">
+                    <label for="transport-yes" class="switch-label">Нужен</label>
+                    <div class="switch-indicator transport-indicator"></div>
+                </div>
+            </div>
+
+            <textarea name="message" placeholder="Ваше пожелание и ФИО с кем вы придете" rows="3"></textarea>
+            <button type="submit">Отправить ответ</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>С любовью, Максим и Екатерина.</p>
+        <p>&copy; 2026</p>
+    </footer>
+
+    <script>
+        // Дата свадьбы (18 июля 2026 года)
+        const weddingDate = new Date("July 18, 2026 17:00:00").getTime();
+
+        // 1. КОД ДЛЯ ТАЙМЕРА ОБРАТНОГО ОТСЧЕТА
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Обновление DOM
+            if (document.getElementById("days")) {
+                // Убеждаемся, что дни всегда трехзначные
+                document.getElementById("days").innerHTML = (days < 0 ? 0 : days).toString().padStart(3, '0');
+                document.getElementById("hours").innerHTML = (hours < 0 ? 0 : hours).toString().padStart(2, '0');
+                document.getElementById("minutes").innerHTML = (minutes < 0 ? 0 : minutes).toString().padStart(2, '0');
+                document.getElementById("seconds").innerHTML = (seconds < 0 ? 0 : seconds).toString().padStart(2, '0');
+            }
+
+            // Если время вышло
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                if (document.getElementById("countdown-timer")) {
+                    document.getElementById("countdown-timer").innerHTML = "Праздник в самом разгаре!";
+                }
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Вызываем сразу, чтобы не ждать секунду
+
+        // 2. КОД ДЛЯ АНИМАЦИИ РАСПИСАНИЯ ПРИ СКРОЛЛЕ
+        const scheduleItems = document.querySelectorAll('#schedule-list-animated li');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target); // Остановить наблюдение после анимации
+                }
+            });
+        }, {
+            threshold: 0.5 // Элемент должен быть виден на 50%
+        });
+
+        scheduleItems.forEach(item => {
+            observer.observe(item);
+        });
+
+        // 3. КОД ДЛЯ МУЗЫКАЛЬНОГО ПЛЕЕРА
+            const audio = document.getElementById('wedding-music');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const muteBtn = document.getElementById('mute-btn');
+    const favoriteBtn = document.getElementById('favorite-btn');
+
+    // Новые кнопки
+    const skipBackwardBtn = document.getElementById('skip-backward-btn');
+    const skipForwardBtn = document.getElementById('skip-forward-btn');
+
+    // Кнопки Назад/Вперед (неактивные)
+    skipBackwardBtn.addEventListener('click', () => {
+        // Эта кнопка не будет выполнять никаких действий
+        console.log("Кнопка 'Назад' нажата, но функция отключена.");
+        alert("Эта функция пока не работает.");
+    });
+
+    skipForwardBtn.addEventListener('click', () => {
+        // Эта кнопка не будет выполнять никаких действий
+        console.log("Кнопка 'Вперед' нажата, но функция отключена.");
+        alert("Эта функция пока не работает.");
+    });
+
+
+    // Кнопка Play/Pause
+    playPauseBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
+            playPauseBtn.querySelector('i').className = 'fas fa-pause';
+        } else {
+            audio.pause();
+            playPauseBtn.querySelector('i').className = 'fas fa-play';
+        }
+    });
+
+    // Кнопка Mute
+    muteBtn.addEventListener('click', () => {
+        audio.muted = !audio.muted;
+        if (audio.muted) {
+            muteBtn.querySelector('i').className = 'fas fa-volume-mute';
+        } else {
+            muteBtn.querySelector('i').className = 'fas fa-volume-up';
+        }
+    });
+
+    // Кнопка Favorite (просто визуальный эффект)
+    favoriteBtn.addEventListener('click', () => {
+        favoriteBtn.classList.toggle('active');
+        favoriteBtn.querySelector('i').className = favoriteBtn.classList.contains('active') ? 'fas fa-heart' : 'far fa-heart';
+    });
+
+        // =========================================================
+        // 4. КОД ДЛЯ ОТПРАВКИ ФОРМЫ В TELEGRAM (Прямое API)
+        // =========================================================
+
+        // 🛑 ВАЖНО: Хранение токена в клиентском коде (BOT_TOKEN) небезопасно!
+        // Используйте эту прямую отправку только на свой страх и риск.
+        const BOT_TOKEN = "8575420314:AAEgbjnevLfStRUrVNreyiPTkRG7gIxtc4w";
+        const CHAT_ID = "-1003279510042";
+
+        const rsvpForm = document.getElementById("rsvpForm");
+
+        rsvpForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const submitButton = rsvpForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Отправка...';
+
+            const form = e.target;
+            const name = form.name.value.trim() || 'Аноним';
+            const attendanceValue = form.attendance.value;
+            // УДАЛЕНО: const guests = form.guests.value.trim() || '1';
+            const transport = form.transport.value;
+            const message = form.message.value.trim();
+
+            const attendanceStatus = attendanceValue === "Приду" ? "✅ Приду" : "❌ Не смогу прийти";
+            const transportStatus = transport === "Нужен" ? "🚌 Нужен" : "❌ Не нужен";
+
+            // Формируем сообщение для Telegram без поля "Гости"
+            const text = `
+                    💌 *НОВЫЙ ОТВЕТ RSVP*
+                    ---
+                    *👤 Имя:* ${name}
+                    *✅ Присутствие:* ${attendanceStatus}
+                    *🚌 Трансфер:* ${transportStatus}
+                    *📝 Пожелание/Комментарий:* ${message || '«Пожеланий нет»'}
+                    `.trim();
+
+            try {
+                const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+                // Используем fetch для отправки
+                const response = await fetch(telegramUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: text,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    alert('Спасибо! Ваш ответ успешно отправлен!');
+                    form.reset();
+                } else {
+                    console.error("Ошибка API Telegram:", data);
+                    alert("Произошла ошибка при отправке (API). Попробуйте снова или свяжитесь с организатором.");
+                }
+
+
+            } catch (err) {
+                alert("Произошла ошибка при отправке (Сеть). Попробуйте снова.");
+                console.error("Сетевая ошибка:", err);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Отправить ответ';
+            }
+        });
+    </script>
+</body>
+</html>
