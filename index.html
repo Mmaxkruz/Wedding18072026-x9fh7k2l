@@ -12,6 +12,13 @@
          /* ======================================================
         ОБЪЯВЛЕНИЕ ЛОКАЛЬНОГО ШРИФТА
         ====================================================== */
+        :root {
+            --accent: #e6b9d2;          /* пудрово-розовый акцент */
+            --accent-dark: #d39bb8;
+            --text-main: #333;
+            --text-muted: #777;
+            --bg-soft: rgba(255,255,255,0.92);
+        }
         @font-face {
             font-family: 'Saint Amour Script';
             src: url('./o.ttf') format('truetype');
@@ -35,22 +42,7 @@
              min-height: 100vh;
              position: relative;
          }
-
-         body::before {
-             content: '';
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             background-image: url('./background.jpg');
-             background-size: cover;
-             background-position: center center;
-             background-attachment: fixed;
-             filter: grayscale(100%);
-             z-index: -1;
-         }
-
+    
          @media (max-width: 768px) {
              form {
                  padding: 1.5rem 1rem;
@@ -80,6 +72,13 @@
              section[style*="max-width: 800px"] h2 {
                  font-size: 2rem !important;
                  margin-bottom: 2rem !important;
+             }
+
+             .map-button {
+                 width: 100%;
+                 max-width: 100%;
+                 font-size: 0.8rem;
+                 height: 44px;
              }
          }
 
@@ -189,9 +188,8 @@
              padding: 0;
          }
 
-         /* ПРАВИЛО ДЛЯ ИМЕН С ЛОКАЛЬНЫМ ШРИФТОМ */
         .italianno-text {
-            font-family: 'Saint Amour Script', cursive; /* Применяем локальный шрифт */
+            font-family: 'Saint Amour Script', cursive;
             font-size: 10rem;
             font-weight: 200;
             color: #333;
@@ -213,10 +211,6 @@
          section {
              padding: 3rem 1rem;
          }
-
-         /* ======================================================
-        СТИЛИ ДЛЯ ВСЕХ ОСТАЛЬНЫХ ЭЛЕМЕНТОВ (БЕЗ ИЗМЕНЕНИЙ)
-        ====================================================== */
 
          .invite-text {
              max-width: 600px;
@@ -260,11 +254,7 @@
          }
 
          .tip-item {
-             background-color: #fff;
-             padding: 1.5rem;
-             border-radius: 1rem;
-             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-             border-left: 5px solid #999;
+             border-left-color: var(--accent);
          }
 
              .tip-item strong {
@@ -274,14 +264,6 @@
                  margin-bottom: 0.5rem;
                  font-weight: 600;
              }
-
-         .countdown-container {
-             padding: 60px 20px;
-             text-align: center;
-             background-color: #ffffff;
-             position: relative;
-         }
-
          .date-section {
              margin-bottom: 3rem;
          }
@@ -376,7 +358,7 @@
              .countdown-compact .countdown-label {
                  font-size: 0.65rem;
                  margin-top: 3px;
-             }
+         }
          }
 
          @media (max-width: 480px) {
@@ -423,7 +405,6 @@
              font-weight: 300;
              letter-spacing: 0.1em;
          }
-
          .schedule-container {
              max-width: 800px;
              margin: 3rem auto 0;
@@ -478,8 +459,8 @@
              }
 
              .schedule-list .event-details {
-                 display: flex;
-                 flex-direction: column;
+             display: flex;
+             flex-direction: column;
                  gap: 0.5rem;
              }
 
@@ -488,7 +469,7 @@
                  color: #333;
                  font-size: 1.1rem;
                  margin-bottom: 0.3rem;
-             }
+         }
 
              .schedule-list .event-location {
                  font-weight: 400;
@@ -506,7 +487,7 @@
 
              .schedule-list .icon-wrapper {
                  display: none;
-             }
+                 }
 
          .divider {
              width: 60%;
@@ -611,7 +592,7 @@
                      background: #555;
                  }
 
-         iframe {
+        iframe {
              border: 0;
              width: 100%;
              max-width: 600px;
@@ -621,22 +602,49 @@
              margin: 1rem auto;
          }
 
-         .map-button {
-             display: inline-block;
-             margin-top: 1rem;
-             padding: 0.8rem 1.5rem;
-             background-color: #333;
-             border-radius: 0.8rem;
-             text-decoration: none;
-             color: #fff;
-             transition: background 0.3s ease;
-             font-weight: 400;
-         }
+        .map-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-             .map-button:hover {
-                 background-color: #555;
-             }
+            width: auto;
+            max-width: 260px;
+            height: 46px;
 
+            margin: 1.5rem auto 0;
+            padding: 0 22px;
+
+            background-color: #1f1f1f;
+            color: #ffffff;
+
+            font-size: 0.85rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            white-space: nowrap;
+
+            border-radius: 999px;
+            border: none;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .map-button:hover {
+            background-color: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+        }
+
+        .map-button:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(33, 33, 33, 0.45);
+        }
          footer {
              font-size: 0.9rem;
              color: #999;
@@ -717,7 +725,6 @@
              transform: translateX(100%);
          }
 
-         /* Адаптивные стили */
          @media (max-width: 1024px) {
              .left-column {
                  padding: 3rem 2rem;
@@ -937,12 +944,132 @@
                  margin-bottom: 2rem !important;
              }
          }
+         /* ======================================================
+        АККУРАТНЫЕ АНИМАЦИИ ПОЯВЛЕНИЯ
+        ====================================================== */
+
+
+        /* Появление без смещения (для фото) */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        /* Активация */
+        .fade-up.show,
+        .fade-in.show {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Каскад для списков */
+        .stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .stagger.show > * {
+            animation: staggerFade 0.6s ease forwards;
+        }
+
+        .stagger.show > *:nth-child(1) { animation-delay: 0.05s; }
+        .stagger.show > *:nth-child(2) { animation-delay: 0.15s; }
+        .stagger.show > *:nth-child(3) { animation-delay: 0.25s; }
+        .stagger.show > *:nth-child(4) { animation-delay: 0.35s; }
+        .stagger.show > *:nth-child(5) { animation-delay: 0.45s; }
+        .stagger.show > *:nth-child(6) { animation-delay: 0.55s; }
+
+        @keyframes staggerFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .tip-item,
+        form,
+        iframe {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .tip-item:hover,
+        form:hover,
+        iframe:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+        }
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2, h3 {
+            margin-bottom: 2.5rem;
+        }
+
+        p, li {
+            line-height: 1.75;
+        }
+
+        /* Общая типографика для текстов (кроме верхнего заголовка с именами) */
+        section p,
+        section li {
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .invite-text {
+            letter-spacing: 0.03em;
+            max-width: 46rem;
+            margin: 0 auto 3rem;
+            font-size: 1rem;
+        }
+
+        /* Небольшой сдвиг заголовков при появлении */
+        .heading-shift {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .heading-shift.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.65),
+                    rgba(255,255,255,0.65)
+                ),
+                url('./background.jpg') center / cover no-repeat;
+            filter: grayscale(100%);
+            z-index: -1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+            }
+
+            .fade-up.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="left-column">
-            <div class="minimalist-title">
+            <div class="minimalist-title fade-up">
                 <span class="large-letter">Е</span>
                 <div class="minimalist-divider"></div>
                 Екатерина<br>
@@ -950,11 +1077,11 @@
                 Максим
                 <div class="minimalist-divider"></div>
                 <span class="large-letter">М</span>
+                </div>
             </div>
-        </div>
 
         <div class="right-column">
-            <img src="./me.jpg" alt="Максим и Екатерина" class="hero-image">
+            <img src="./me.jpg" alt="Максим и Екатерина" class="hero-image fade-in">
             <div class="image-caption">
                 <div class="date-text">18 ИЮЛЯ 2026</div>
                 <div class="waiting-text">ЖДЕМ ВАС</div>
@@ -967,24 +1094,24 @@
         Ваш браузер не поддерживает аудио-элемент.
     </audio>
 
-    <div class="countdown-compact">
-        <div class="countdown-item">
+    <div class="countdown-compact fade-up">
+                <div class="countdown-item">
             <span class="countdown-number" id="weeks-compact">00</span>
             <span class="countdown-label">недель</span>
-        </div>
-        <div class="countdown-item">
+                </div>
+                <div class="countdown-item">
             <span class="countdown-number" id="days-compact">000</span>
             <span class="countdown-label">дней</span>
-        </div>
-        <div class="countdown-item">
+                </div>
+                <div class="countdown-item">
             <span class="countdown-number" id="hours-compact">00</span>
             <span class="countdown-label">часов</span>
-        </div>
-        <div class="countdown-item">
+                </div>
+                <div class="countdown-item">
             <span class="countdown-number" id="minutes-compact">00</span>
             <span class="countdown-label">минут</span>
-        </div>
-    </div>
+                </div>
+            </div>
 
     <div class="music-player">
         <button id="skip-backward-btn" title="Предыдущий трек (неактивно)" disabled>
@@ -1006,11 +1133,11 @@
         <button id="favorite-btn" title="В избранное (просто иконка)">
             <i class="far fa-heart"></i>
         </button>
-    </div>
+        </div>
 
     <div class="divider"></div>
 
-    <section class="invite-text">
+    <section class="invite-text fade-up">
         Мы рады сообщить Вам, что 18.07.2026 состоится самое главное торжество в нашей жизни - день нашей свадьбы!
         Приглашаем Вас разделить с нами радость этого незабываемого дня.
         <br><br>
@@ -1021,40 +1148,40 @@
 
     <section>
         <div class="schedule-container">
-            <h3>Свадебное<br>расписание</h3>
-            <ul class="schedule-list" id="schedule-list-animated">
+            <h3 class="heading-shift">Свадебное<br>расписание</h3>
+            <ul class="schedule-list stagger" id="schedule-list-animated">
                 <li>
                     <span class="time">11:30</span>
                     <div class="event-details">
-                        <span class="event-text">Сбор гостей у ЗАГСа</span>
+                    <span class="event-text">Сбор гостей у ЗАГСа</span>
                         <span class="event-location">ЗАГС</span>
                     </div>
                 </li>
                 <li>
                     <span class="time">11:45</span>
                     <div class="event-details">
-                        <span class="event-text">Время росписи</span>
+                    <span class="event-text">Время росписи</span>
                         <span class="event-location">ЗАГС</span>
                     </div>
                 </li>
                 <li>
                     <span class="time">16:30</span>
                     <div class="event-details">
-                        <span class="event-text">Сбор гостей у банкетного зала "Зефир"</span>
+                    <span class="event-text">Сбор гостей у банкетного зала "Зефир"</span>
                         <span class="event-location">Банкетный зал "Зефир"</span>
                     </div>
                 </li>
                 <li>
                     <span class="time">17:00</span>
                     <div class="event-details">
-                        <span class="event-text">Начало банкета</span>
+                    <span class="event-text">Начало банкета</span>
                         <span class="event-location">Банкетный зал "Зефир"</span>
                     </div>
                 </li>
                 <li>
                     <span class="time">22:00</span>
                     <div class="event-details">
-                        <span class="event-text">Завершение банкета</span>
+                    <span class="event-text">Завершение банкета</span>
                         <span class="event-location">Банкетный зал "Зефир"</span>
                     </div>
                 </li>
@@ -1063,9 +1190,9 @@
     </section>
 
     <section class="tips-section">
-        <h2>Полезные подсказки</h2>
+        <h2 class="heading-shift">Полезные подсказки</h2>
         
-        <ul class="tips-list">
+        <ul class="tips-list stagger">
             <li class="tip-item">
                 <strong>Примечание</strong>
                 Будем благодарны, если вы воздержитесь от криков "Горько" на празднике, ведь поцелуй - это знак выражения чувств, он не может быть по заказу.
@@ -1076,7 +1203,7 @@
             </li>
             <li class="tip-item">
                 <strong>Сюрприз</strong>
-                Возьмите с собой **отличное настроение!** Приветствуются ваши поздравления, активное участие в интерактивах, творческие выступления! Вы можете обратиться к нашему организатору для воплощения своих идей:
+                Возьмите с собой отличное настроение! Приветствуются ваши поздравления, активное участие в интерактивах, творческие выступления! Вы можете обратиться к нашему организатору для воплощения своих идей:
                 <p>Анастасия (номер....)</p>
             </li>
             <li class="tip-item">
@@ -1100,8 +1227,8 @@
         <div class="divider"></div>
     </section>
     <section style="max-width: 800px; margin: 0 auto; padding: 3rem 2rem;">
-        <h2 style="font-family: 'Times New Roman', serif; font-size: 2.5rem; font-weight: 300; color: #333; margin-bottom: 3rem; text-align: center; line-height: 1.3; letter-spacing: 0.02em;">Подтверждение</h2>
-        <form id="rsvpForm">
+        <h2 class="heading-shift" style="font-family: 'Times New Roman', serif; font-size: 2.5rem; font-weight: 300; color: #333; margin-bottom: 3rem; text-align: center; line-height: 1.3; letter-spacing: 0.02em;">Подтверждение</h2>
+        <form id="rsvpForm" class="fade-up">
             <input type="text" name="name" placeholder="Ваше ФИО" required />
 
             <p style="margin: 0; font-size: 0.95rem; color: #555; text-align: left;">Подтвердите Ваше присутствие:</p>
@@ -1132,10 +1259,17 @@
     </section>
 
     <section style="max-width: 800px; margin: 0 auto; padding: 3rem 2rem;">
-        <h2 style="font-family: 'Times New Roman', serif; font-size: 2.5rem; font-weight: 300; color: #333; margin-bottom: 3rem; text-align: center; line-height: 1.3; letter-spacing: 0.02em;">Место проведения</h2>
+        <h2 class="heading-shift" style="font-family: 'Times New Roman', serif; font-size: 2.5rem; font-weight: 300; color: #333; margin-bottom: 3rem; text-align: center; line-height: 1.3; letter-spacing: 0.02em;">Место проведения</h2>
         <p style="text-align: center; margin-bottom: 2rem;">Шатёр "Зефир" • 18 июля 2026</p>
-        <iframe src="https://yandex.ru/map-widget/v1/?text=шатёр%20Зефир" allowfullscreen></iframe>
-        <a class="map-button" href="https://yandex.ru/maps/?text=шатёр%20Зефир" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Открыть в Яндекс.Картах</a>
+        <iframe src="https://yandex.ru/map-widget/v1/?text=%D1%88%D0%B0%D1%82%D1%91%D1%80%20%D0%97%D0%B5%D1%84%D0%B8%D1%80" allowfullscreen></iframe>
+        <a 
+            href="https://yandex.ru/maps/?text=%D1%88%D0%B0%D1%82%D1%91%D1%80%20%D0%97%D0%B5%D1%84%D0%B8%D1%80" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="map-button"
+        >
+            Открыть в Яндекс.Картах
+        </a>
     </section>
 
     <footer>
@@ -1147,7 +1281,6 @@
         // Дата свадьбы (18 июля 2026 года)
         const weddingDate = new Date("July 18, 2026 17:00:00").getTime();
 
-        // 1. КОД ДЛЯ ТАЙМЕРА ОБРАТНОГО ОТСЧЕТА
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
@@ -1158,103 +1291,76 @@
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-            // Обновление DOM для основного таймера
-            if (document.getElementById("weeks")) {
-                document.getElementById("weeks").innerHTML = (weeks < 0 ? 0 : weeks).toString().padStart(2, '0');
-                document.getElementById("days").innerHTML = (days < 0 ? 0 : days).toString().padStart(3, '0');
-                document.getElementById("hours").innerHTML = (hours < 0 ? 0 : hours).toString().padStart(2, '0');
-                document.getElementById("minutes").innerHTML = (minutes < 0 ? 0 : minutes).toString().padStart(2, '0');
-            }
+            const weeksEl = document.getElementById("weeks-compact");
+            const daysEl = document.getElementById("days-compact");
+            const hoursEl = document.getElementById("hours-compact");
+            const minutesEl = document.getElementById("minutes-compact");
 
-            // Обновление DOM для компактного таймера перед плеером
-            if (document.getElementById("weeks-compact")) {
-                document.getElementById("weeks-compact").innerHTML = (weeks < 0 ? 0 : weeks).toString().padStart(2, '0');
-                document.getElementById("days-compact").innerHTML = (days < 0 ? 0 : days).toString().padStart(3, '0');
-                document.getElementById("hours-compact").innerHTML = (hours < 0 ? 0 : hours).toString().padStart(2, '0');
-                document.getElementById("minutes-compact").innerHTML = (minutes < 0 ? 0 : minutes).toString().padStart(2, '0');
+            if (weeksEl && daysEl && hoursEl && minutesEl) {
+                weeksEl.innerHTML = (weeks < 0 ? 0 : weeks).toString().padStart(2, '0');
+                daysEl.innerHTML = (days < 0 ? 0 : days).toString().padStart(3, '0');
+                hoursEl.innerHTML = (hours < 0 ? 0 : hours).toString().padStart(2, '0');
+                minutesEl.innerHTML = (minutes < 0 ? 0 : minutes).toString().padStart(2, '0');
             }
-
-            // Если время вышло
             if (distance < 0) {
                 clearInterval(countdownInterval);
-                if (document.getElementById("countdown-timer")) {
-                    document.getElementById("countdown-timer").innerHTML = "Праздник в самом разгаре!";
-                }
+                if (weeksEl) weeksEl.innerHTML = "00";
+                if (daysEl) daysEl.innerHTML = "000";
+                if (hoursEl) hoursEl.innerHTML = "00";
+                if (minutesEl) minutesEl.innerHTML = "00";
             }
         }
 
         const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Вызываем сразу, чтобы не ждать секунду
+        updateCountdown();
 
-        // 2. КОД ДЛЯ АНИМАЦИИ РАСПИСАНИЯ ПРИ СКРОЛЛЕ
+        // Анимация расписания
         const scheduleItems = document.querySelectorAll('#schedule-list-animated li');
-
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate');
-                    observer.unobserve(entry.target); // Остановить наблюдение после анимации
+                    observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.5 // Элемент должен быть виден на 50%
+        }, { threshold: 0.5 });
+
+        scheduleItems.forEach(item => observer.observe(item));
+
+        // Плеер
+        const audio = document.getElementById('wedding-music');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const muteBtn = document.getElementById('mute-btn');
+        const favoriteBtn = document.getElementById('favorite-btn');
+        const skipBackwardBtn = document.getElementById('skip-backward-btn');
+        const skipForwardBtn = document.getElementById('skip-forward-btn');
+
+        skipBackwardBtn.disabled = true;
+        skipForwardBtn.disabled = true;
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
+                playPauseBtn.querySelector('i').className = 'fas fa-pause';
+            } else {
+                audio.pause();
+                playPauseBtn.querySelector('i').className = 'fas fa-play';
+            }
         });
 
-        scheduleItems.forEach(item => {
-            observer.observe(item);
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            muteBtn.querySelector('i').className = audio.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
         });
 
-        // 3. КОД ДЛЯ МУЗЫКАЛЬНОГО ПЛЕЕРА
-            const audio = document.getElementById('wedding-music');
-    const playPauseBtn = document.getElementById('play-pause-btn');
-    const muteBtn = document.getElementById('mute-btn');
-    const favoriteBtn = document.getElementById('favorite-btn');
+        favoriteBtn.addEventListener('click', () => {
+            favoriteBtn.classList.toggle('active');
+            favoriteBtn.querySelector('i').className = favoriteBtn.classList.contains('active') ? 'fas fa-heart' : 'far fa-heart';
+        });
 
-    // Новые кнопки
-    const skipBackwardBtn = document.getElementById('skip-backward-btn');
-    const skipForwardBtn = document.getElementById('skip-forward-btn');
-
-    // Кнопки Назад/Вперед отключены
-    skipBackwardBtn.disabled = true;
-    skipForwardBtn.disabled = true;
-
-
-    // Кнопка Play/Pause
-    playPauseBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
-            playPauseBtn.querySelector('i').className = 'fas fa-pause';
-        } else {
-            audio.pause();
-            playPauseBtn.querySelector('i').className = 'fas fa-play';
-        }
-    });
-
-    // Кнопка Mute
-    muteBtn.addEventListener('click', () => {
-        audio.muted = !audio.muted;
-        if (audio.muted) {
-            muteBtn.querySelector('i').className = 'fas fa-volume-mute';
-        } else {
-            muteBtn.querySelector('i').className = 'fas fa-volume-up';
-        }
-    });
-
-    // Кнопка Favorite (просто визуальный эффект)
-    favoriteBtn.addEventListener('click', () => {
-        favoriteBtn.classList.toggle('active');
-        favoriteBtn.querySelector('i').className = favoriteBtn.classList.contains('active') ? 'fas fa-heart' : 'far fa-heart';
-    });
-
-        // =========================================================
-        // 4. КОД ДЛЯ ОТПРАВКИ ФОРМЫ В TELEGRAM (Прямое API)
-        // =========================================================
-
-        // 🛑 ВАЖНО: Хранение токена в клиентском коде (BOT_TOKEN) небезопасно!
-        // Используйте эту прямую отправку только на свой страх и риск.
+        // Отправка RSVP в Telegram
         const BOT_TOKEN = "8575420314:AAEgbjnevLfStRUrVNreyiPTkRG7gIxtc4w";
         const CHAT_ID = "-1003279510042";
-
         const rsvpForm = document.getElementById("rsvpForm");
 
         rsvpForm.addEventListener("submit", async function (e) {
@@ -1267,14 +1373,12 @@
             const form = e.target;
             const name = form.name.value.trim() || 'Аноним';
             const attendanceValue = form.attendance.value;
-            // УДАЛЕНО: const guests = form.guests.value.trim() || '1';
             const transport = form.transport.value;
             const message = form.message.value.trim();
 
             const attendanceStatus = attendanceValue === "Приду" ? "✅ Приду" : "❌ Не смогу прийти";
             const transportStatus = transport === "Нужен" ? "🚌 Нужен" : "❌ Не нужен";
 
-            // Формируем сообщение для Telegram без поля "Гости"
             const text = `
                     💌 *НОВЫЙ ОТВЕТ RSVP*
                     ---
@@ -1287,7 +1391,6 @@
             try {
                 const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
-                // Используем fetch для отправки
                 const response = await fetch(telegramUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -1308,7 +1411,6 @@
                     alert("Произошла ошибка при отправке (API). Попробуйте снова или свяжитесь с организатором.");
                 }
 
-
             } catch (err) {
                 alert("Произошла ошибка при отправке (Сеть). Попробуйте снова.");
                 console.error("Сетевая ошибка:", err);
@@ -1317,6 +1419,18 @@
                 submitButton.textContent = 'Отправить ответ';
             }
         });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.fade-up, .fade-in, .stagger, .heading-shift');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
